@@ -10,6 +10,14 @@ And, git-asset provides usefull command for `git filter-branch`. Yay
 
 Sounds good? :octocat: but still EXPERIMENTAL!
 
+Dependencies
+------------
+
+* hashie
+* aws-sdk
+* git command
+* scp command
+
 Basic Usage
 -----------
 
