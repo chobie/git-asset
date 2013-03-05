@@ -39,11 +39,10 @@ module GitAsset
           FileUtils.mv(tempfile.path, asset_path)
         end
 
-        transport = GitAsset::Transport::Local.new({:path => "/tmp/assets"})
+        transport = GitAsset::Application.get_transport
         if !transport.exists?(hx.to_s)
           transport.push(hx.to_s, asset_path)
         end
-
       end
     end
   end

@@ -2,8 +2,6 @@ module GitAsset
   module Application
     class Sync
       def self.run!
-        GitAsset::Application.prepare
-
         puts "# running sync process..."
 
         # move file from asset path.
@@ -24,11 +22,11 @@ module GitAsset
         asset_dir = File.join(Filter::GitCommand.toplevel, Filter::GitCommand.asset_path)
 
         # puts asset_dir
+        transport = GitAsset::Application.get_transport
 
-        transport = GitAsset::Transport::Local.new({:path => "/tmp/assets"})
-
+        toplevel = Filter::GitCommand.toplevel
         result.each do |obj|
-          target_path = File.join(File.dirname(Filter::GitCommand.toplevel), obj[:path])
+          target_path = File.join(File.dirname(toplevel), obj[:path])
           #asset_path  = File.join(Filter::GitCommand.toplevel, Filter::GitCommand.asset_path, data[0,2], data[2,40])
 
           if File.exists?(target_path)
@@ -52,7 +50,6 @@ module GitAsset
             raise "something wrong"
           end
         end
-
 
         STDERR.puts "# okay, now update git-index"
         `git checkout -- .`

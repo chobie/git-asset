@@ -1,9 +1,11 @@
 module GitAsset
   module Transport
     class Base
-      attr_reader :config
-      def initialize(config)
+      attr_reader :config, :gitdir
+      def initialize(gitdir, config)
+        @gitdir = gitdir
         @config = config
+
         validate
       end
 

@@ -23,7 +23,7 @@ module GitAsset
         end
 
         # puts asset_dir
-        transport = GitAsset::Transport::Local.new({:path => "/tmp/assets"})
+        transport = GitAsset::Application.get_transport
 
         result.each do |obj|
           target_path = File.join(obj[:path])

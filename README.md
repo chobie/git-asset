@@ -47,6 +47,49 @@ git asset deactivate
 # deactivate filter and checkout files. (don't do this in dirty working tree)
 ````
 
+
+Supported Transports
+--------------------
+
+:local transport:
+
+````
+[git-asset.transport]
+    type = local
+
+[git-asset.transport.local]
+    path = /var/git-asset/<reponame>/
+````
+
+:scp transport:
+
+````
+[git-asset.transport]
+    type = scp
+
+[git-asset.transport.scp]
+    user = someuser
+    host = remoteserver.com
+    path = /opt/media
+    port = 22
+# you can also specify scp options with opts key.
+    opts = -l 8000
+````
+
+:s3 transport:
+
+````
+[git-asset.transport]
+    type = s3
+
+[git-asset.transport.s3]
+    key    = S3KEY
+    secret = S3SECRET
+    bucket = BucketName
+    endpoint = s3-ap-northeast-1.amazonaws.com (tokyo region)
+````
+
+
 References
 ----------
 

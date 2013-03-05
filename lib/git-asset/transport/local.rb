@@ -1,11 +1,21 @@
 module GitAsset
   module Transport
 
+    # Local Transport
+    #
+    # configurations
+    #
+    # [git-asset]
+    #    transport = local
+    #
+    # [git-asset.transport.local]
+    #    path = /tmp/assets
+    #
     class Local < Base
       def validate()
-        if config[:path].nil?
-          raise "path does not set"
-        end
+        raise "git-asset.transport section does not find" if config["git-asset"]["transport"].nil?
+        raise "git-asset.transport.local section does not find" if config["git-asset"]["transport"]["local"].nil?
+        raise "path does not set" if config["git-asset"]["transport"]["local"]["path"].nil?
       end
 
       def exists?(path)
@@ -15,6 +25,7 @@ module GitAsset
       def push(path, file_path)
         if !exists?(path)
           asset_path = real_asset_path(path)
+
           tempfile = Tempfile.new('asset')
           open(file_path, "rb"){|f|
             while data = f.read(8192)
@@ -29,7 +40,6 @@ module GitAsset
       end
 
       def pull(path)
-        p exists?(path)
         if exists?(path)
           asset_path = real_asset_path(path)
 
@@ -40,18 +50,19 @@ module GitAsset
             end
 
             tempfile.close
-            puts "copying file."
-            FileUtils.mkdir_p(File.join("/Users/chobie/src/asset-test/.git/asset/objects",  path[0,2]))
-            FileUtils.mv(tempfile.path, File.join("/Users/chobie/src/asset-test/.git/asset/objects",  path[0,2], path[2,40]))
+
+            STDERR.puts "copying file."
+            FileUtils.mkdir_p(File.join(@gitdir, "/asset/objects",  path[0,2]))
+            FileUtils.mv(tempfile.path, File.join(@gitdir, "/asset/objects",  path[0,2], path[2,40]))
           end
         else
-          puts "NAIPOOO:" + real_asset_path(path)
+          STDERR.puts "NAIPOOO:" + real_asset_path(path)
         end
       end
 
       protected
       def real_asset_path(path)
-        File.join(config[:path], path[0,2], path[2,40])
+        File.join(config["git-asset"]["transport"]["local"]["path"], path[0,2], path[2,40])
       end
     end
   end

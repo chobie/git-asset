@@ -21,11 +21,15 @@ module GitAsset
       @class ||= self.new
     end
 
+    def self.parsed
+      instance = self.instance
+      instance.config
+    end
+
     def parse_config
       config_path = File.join(git_dir, "config")
       if File.exist?(config_path)
         @config = ConfigParser.new(open(config_path, "r"){|f| f.read}).parsed
-        pp config
       else
         raise "can't find git config"
       end

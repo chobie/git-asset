@@ -87,7 +87,6 @@ module GitAsset
                  :ext => ext.sub(/^\./, ""),
           })
         end
-
       end
 
       def self.asset_path

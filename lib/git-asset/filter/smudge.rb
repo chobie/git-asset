@@ -18,7 +18,7 @@ module GitAsset
               end
             end
           else
-            STDERR.puts "# file does not exist. for now outputs stub file."
+            STDERR.puts "# file does not exist. for now outputs stub file. probably you missed `git-asset sync` before checkout file?"
             while data = STDIN.read(8192)
               STDOUT.write data
             end

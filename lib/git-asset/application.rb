@@ -1,5 +1,6 @@
 require 'git-asset/application/activate'
 require 'git-asset/application/deactivate'
+require 'git-asset/application/sync'
 
 module GitAsset
   module Application
@@ -9,6 +10,22 @@ module GitAsset
       if asset_path.empty?
         puts "# git-asset failed\nyou have to do `git config git-asset.path 'assets'` before run asset command"
         exit -1
+      end
+    end
+
+    def self.get_transport
+      config = GitAsset::Config.parsed
+      raise "git-asset section does not find." if config["git-asset"].nil?
+
+      transport = case config["git-asset"].transport.type
+        when "local"
+          GitAsset::Transport::Local.new(GitAsset::Config.instance.git_dir, config)
+        when "scp"
+          GitAsset::Transport::Scp.new(GitAsset::Config.instance.git_dir, config)
+        when "s3"
+          GitAsset::Transport::S3.new(GitAsset::Config.instance.git_dir, config)
+        else
+          raise "git-asset.transport does not find"
       end
     end
 
