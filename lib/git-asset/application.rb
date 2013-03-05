@@ -4,20 +4,11 @@ require 'git-asset/application/sync'
 
 module GitAsset
   module Application
-
-    def self.prepare
-      asset_path = `git config git-asset.path`.chomp
-      if asset_path.empty?
-        puts "# git-asset failed\nyou have to do `git config git-asset.path 'assets'` before run asset command"
-        exit -1
-      end
-    end
-
     def self.get_transport
       config = GitAsset::Config.parsed
       raise "git-asset section does not find." if config["git-asset"].nil?
 
-      transport = case config["git-asset"].transport.type
+      transport = case config["git-asset"].transport.primary
         when "local"
           GitAsset::Transport::Local.new(GitAsset::Config.instance.git_dir, config)
         when "scp"

@@ -63,7 +63,7 @@ Supported Transports
 
 ````
 [git-asset.transport]
-    type = local
+    primary = local
 
 [git-asset.transport.local]
     path = /var/git-asset/<reponame>/
@@ -73,7 +73,7 @@ Supported Transports
 
 ````
 [git-asset.transport]
-    type = scp
+    primary = scp
 
 [git-asset.transport.scp]
     user = someuser
@@ -88,7 +88,7 @@ Supported Transports
 
 ````
 [git-asset.transport]
-    type = s3
+    primary = s3
 
 [git-asset.transport.s3]
     key    = S3KEY
