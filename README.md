@@ -29,7 +29,7 @@ git reflog expire --expire=now --all
 git gc --prune=now
 git gc --aggressive --prune=now
 
-# now, all image / resource files are move to
+# now, all image / resource files are moved to primary transport. let's sync secondary transport.
 
 ````
 
