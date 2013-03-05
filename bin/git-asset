@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'optparse'
+
+$:.unshift File.join(File.expand_path(File.dirname(File.dirname(__FILE__))), 'lib')
+require 'git-asset'
+
+GitAsset::Application.run!
+
