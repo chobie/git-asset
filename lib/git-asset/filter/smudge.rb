@@ -2,10 +2,6 @@ module GitAsset
   module Filter
     class Smudge
       def self.run!(path)
-        # Todo: これで実行初期か継続中かは分かる
-        STDERR.puts "# Smudged: " + path + ":"
-        #+ Process.ppid.to_s
-
         line = STDIN.readline(64).strip
         #raise "Can't fetch #{path}#" unless File.exist? asset_path
 

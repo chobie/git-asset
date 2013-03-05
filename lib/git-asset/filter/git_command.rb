@@ -47,7 +47,7 @@ module GitAsset
       end
 
       def self.targets
-        if ENV.fetch("GIT_COMMIT")
+        if ENV.has_key?("GIT_COMMIT")
           target = ENV["GIT_COMMIT"]
         else
           target = "HEAD"
