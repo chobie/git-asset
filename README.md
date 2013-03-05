@@ -8,7 +8,7 @@ git-asset pushes assets when executing `git-add`. basically, you don't care abou
 Transport class has `exists` API. so we can check existence of file before pushing it.
 And, git-asset provides usefull command for `git filter-branch`. Yay
 
-Sounds good? :octcat: but still EXPERIMENTAL!
+Sounds good? :octocat: but still EXPERIMENTAL!
 
 Basic Usage
 -----------
