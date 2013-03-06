@@ -43,7 +43,7 @@ module GitAsset
       while attempts < max_attempts
 
         path = File.join(directory, ".git")
-        if File.directory? (path)
+        if File.directory?(path)
           return path
         else
           path = File.dirname(directory)

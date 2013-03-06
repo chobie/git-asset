@@ -20,7 +20,7 @@ module GitAsset
           next
         end
 
-        if line[0] == "["
+        if line =~ /^\[/
           line = line.gsub(/["']/, '').gsub(/\s+/, ".")
         else
           key, value = line.split(/=/, 2)
@@ -40,7 +40,7 @@ module GitAsset
       current_key = nil
 
       lines.each do |line|
-        if line[0] == "["
+        if line =~ /^\[/
           line = line.gsub(/(\[|\])/, "")
           subkeys = line.split(".")
           subhash = subkeys.inject(result) do |hash, k|
