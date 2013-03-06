@@ -46,7 +46,7 @@ module GitAsset
         if File.directory?(path)
           return path
         else
-          path = File.dirname(directory)
+          directory = File.dirname(directory)
         end
 
         attempts += 1
